@@ -34,4 +34,5 @@ Streamlit App
 app.py
 
 streamlit run app.py
+python -m streamlit run app.py
 

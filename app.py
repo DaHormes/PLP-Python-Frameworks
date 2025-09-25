@@ -19,10 +19,22 @@ df = load_data()
 st.title("CORD-19 Data Explorer")
 st.write("Simple exploration of COVID-19 research papers dataset")
 
-# Year range slider
-years = sorted(df['year'].dropna().unique())
+## Year range slider
+#years = sorted(df['year'].dropna().unique())
+#year_min, year_max = min(years), max(years)
+#year_range = st.slider("Select year range", year_min, year_max, (2020, 2021))
+
+years = sorted(df['year'].dropna().astype(int).unique())  # force int
 year_min, year_max = min(years), max(years)
-year_range = st.slider("Select year range", year_min, year_max, (2020, 2021))
+
+year_range = st.slider(
+    "Select year range",
+    int(year_min),
+    int(year_max),
+    (2020, 2021),  # default
+    step=1         # make sure step is also int
+)
+
 
 df_filtered = df[(df['year'] >= year_range[0]) & (df['year'] <= year_range[1])]
 
